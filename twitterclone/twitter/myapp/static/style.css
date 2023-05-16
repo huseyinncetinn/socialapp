@@ -1,0 +1,615 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins::wght@400;500;600;700&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Kaushan+Script&family=Poppins:wght@500&display=swap');
+
+*{
+  margin: 0;
+  padding: 0;
+  outline: none;
+  border: none;
+  text-decoration: none;
+  box-sizing: border-box;
+  font-family: "Poppins" , sans-serif;
+  list-style-type:none;
+}
+
+.kirmizi {
+  color: #8B0000;
+}
+.blue{
+  color: blue;
+}
+
+
+body{
+  background: #dccbe5 ;
+}
+
+.main-div nav{
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  height: 100%;
+  left: 0 ;
+  background-color: #673ab7;
+  width: 120px;
+  overflow: hidden;
+  transition: width 0.2s linear;
+  box-shadow: 0 20px 35px rgba(0, 0, 0, 0.5);
+  z-index: 1;
+}
+
+.logo{
+  display: flex;
+  transition: all 0.5s ease;
+  margin: 20px 0 0 20px;
+  margin-bottom: 15px;
+}
+
+.logo img{
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+}
+
+.b i {
+  color: white;
+}
+
+.b a{
+  text-decoration: none;
+  position: relative;
+  color: white ;
+  font-size: 14px;
+  display: table;
+  width: 300px;
+  padding: 10px;
+}
+
+.b a:hover i{
+
+  color:#673ab7;
+}
+
+.b a:hover {
+  background-color: #dccbe5;
+  border-radius: 1rem;
+  color:#673ab7;
+}
+
+.fas {
+  position: relative;
+  width: 70px;
+  height: 40px;
+  top: 14px;
+  font-size: 20px;
+  text-align: center;
+}
+
+.twittericon{
+  position: relative;
+  width: 70px;
+  height: 40px;
+  top: 14px;
+  font-size: 20px;
+  text-align: center;
+}
+
+.nav-item {
+  position: relative;
+  top: 12px;
+  margin-left: 10px;
+}
+
+
+
+.main-div nav:hover {
+  width: 280px;
+  transition: all 0.5s ease;
+}
+
+.logout{
+  position: absolute;
+  bottom: 0;
+}
+
+.main-div{
+  display: flex;
+  justify-content: space-between;
+}
+
+
+.ic-div{
+  width: 100%;
+}
+
+.card-img{
+  max-width: 50%;
+}
+
+.mobile-nav{
+    display: none;
+}
+
+
+.col-12 h6 {
+  font-size: 15px;
+  color: #cfb53b;
+  margin: auto;
+}
+
+
+.col-6 h6 {
+  font-size: 15px;
+  color: #cfb53b;
+}
+
+.karsilama{
+  width: 100%;
+  text-align: center;
+}
+
+.karsilama img {
+  border-radius: 30%;
+}
+
+.karsilama h1 {
+  font-family: 'Kaushan Script', cursive;
+  text-align: center;
+}
+
+.karsilama h1 a {
+  text-decoration: none;
+  color: green;
+}
+
+.mesaj{
+  width: 100%;
+}
+
+.duvar{
+  width: 130px;
+  height: 5px;
+}
+.takip-div{
+width: 100%;
+display: flex;
+justify-content: center;
+}
+
+.takip1-div .takipbutton {
+  width: 100%;
+  padding: 10px;
+  border: 2px solid #008000;
+  border-radius: 25px;
+}
+
+.takip1-div .takipbutton:hover{
+  background-color: #008000;
+  color: #fff;
+}
+
+.takip1-div .takipcikbutton {
+  width: 100%;
+  padding: 10px;
+  border: 2px solid 	#8B0000;
+  border-radius: 25px;
+}
+
+.takip1-div .takipcikbutton:hover{
+  background-color: 	#8B0000;
+  color: #fff;
+}
+
+.blog-post .delete a {
+  text-decoration: none;
+  color: red;
+}
+
+.delete {
+  text-decoration: none;
+ 
+}
+
+.allbtn{
+
+  border: 1px solid #673ab7;
+  color: #673ab7;
+  margin-left: 40%;
+}
+.allbtn:hover{
+background-color: #673ab7 ;
+color: white;
+}
+
+.profilduzenle{
+  display: none;
+}
+
+.sifredegis{
+  display: none;
+}
+
+.tweetle {
+  display: none;
+}
+
+.card-body a{
+  text-decoration: none;
+  color: black;
+}
+
+.form{
+  position:absolute;
+  top: 50px;
+  left: 30%;
+  z-index: 1;
+}
+
+.kapat{
+  position: absolute;
+  top: 7%;
+  left: 33%;
+  z-index: 10;
+}
+
+/* Post Card */
+
+
+@import url("https://fonts.googleapis.com/css?family=Roboto:300,400,700&display=swap");
+
+
+
+.blog_post {
+  background: #ECEFF1;
+  width: 700px;
+  border-radius: 10px;
+  box-shadow: 1px 1px 2rem rgba(0, 0, 0, 0.3);
+  position: relative;
+  border-left : 2px solid grey;
+  border-right: 2px solid grey
+}
+
+
+.container_copy {
+  padding: 6rem 4rem 5rem 4rem;
+}
+
+.container_copy h1 a{
+  text-decoration: none;
+  color: black;
+}
+
+.img_pod {
+  height: 90px;
+  width: 90px;
+  background: linear-gradient(90deg, #673ab7, #ff5e62);
+  box-shadow: 1px 1px 2rem rgba(0, 0, 0, 0.3);
+  border-radius: 100%;
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.img1 {
+  height: 5.3rem;
+  width: 5.3rem;
+  position: relative;
+  border-radius: 100%;
+  box-shadow: 1px 1px 2rem rgba(0, 0, 0, 0.3);  
+}
+
+h3 {
+  margin: 0 0 0.5rem 0;
+  color: #999;
+  font-size: 14px;
+}
+
+h1 {
+  margin: 0 0 1rem 0;
+  font-size: 24px;
+  letter-spacing: 0.5px;
+  color: #333;
+  margin-top: 17px;
+}
+
+p {
+  margin: 0 0 4.5rem 0;
+  font-size: 16px;
+  line-height: 1.45;
+  color: #333;
+}
+
+.btn_primary {
+  border: none;
+  outline: none;
+  background: linear-gradient(90deg, #673ab7, #ff5e62);
+  padding: 1.5rem 2rem;
+  border-radius: 50px;
+  color: white;
+  font-size: 10px;
+  box-shadow: 1px 10px 2rem rgba(255, 94, 98, 0.5);
+  transition: all 0.2s ease-in;
+  text-decoration: none;
+  margin-left: 40%;
+}
+
+.btn_primary:hover {
+  box-shadow: 0px 5px 1rem rgba(255, 94, 98, 0.5);
+}
+
+
+
+
+
+/* Profile card */
+
+.wrapper,
+.wrapper .img-area,
+.social-icons a,
+.buttons button{
+  background: 	#ECEFF1;
+  box-shadow: -3px -3px 7px #ffffff,
+               3px 3px 5px #673ab7;
+}
+.wrapper{
+  position: relative;
+  padding: 30px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  opacity: .8;
+  width: 75%;
+  margin: auto;
+}
+.wrapper .icon{
+  font-size: 17px;
+  color: #31344b;
+  position: absolute;
+  cursor: pointer;
+  opacity: 0.7;
+  top: 15px;
+  height: 35px;
+  width: 35px;
+  text-align: center;
+  line-height: 35px;
+  border-radius: 50%;
+  font-size: 16px;
+}
+.wrapper .icon i{
+  position: relative;
+  z-index: 9;
+}
+.wrapper .icon.arrow{
+  left: 15px;
+}
+.wrapper .icon.dots{
+  right: 15px;
+}
+.wrapper .img-area{
+  height: 150px;
+  width: 150px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.img-area .inner-area{
+  height: calc(100% - 25px);
+  width: calc(100% - 25px);
+  border-radius: 50%;
+}
+.inner-area img{
+  height: 100%;
+  width: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+}
+.wrapper .name{
+  font-size: 23px;
+  font-weight: 500;
+  color: #31344b;
+  margin: 10px 0 5px 0;
+}
+.wrapper .about{
+  color: #44476a;
+  font-weight: 400;
+  font-size: 16px;
+}
+.wrapper .social-icons{
+  margin: 15px 0 25px 0;
+}
+
+.social-share .row1 span{
+  margin-left: 8px;
+}
+
+.social-icons a{
+  position: relative;
+  height: 40px;
+  width: 40px;
+  margin: 0 5px;
+  display: inline-flex;
+  text-decoration: none;
+  border-radius: 50%;
+}
+.social-icons a:hover::before,
+.wrapper .icon:hover::before,
+.buttons button:hover:before{
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  border-radius: 50%;
+  background: #ecf0f3;
+  box-shadow: inset -3px -3px 7px #ffffff,
+              inset 3px 3px 5px #ceced1;
+}
+.buttons button:hover:before{
+  z-index: -1;
+  border-radius: 5px;
+}
+.social-icons a i{
+  position: relative;
+  z-index: 3;
+  text-align: center;
+  width: 100%;
+  height: 100%;
+  line-height: 40px;
+}
+.social-icons a.fb i{
+  color: #4267B2;
+}
+.social-icons a.twitter i{
+  color: #1DA1F2;
+}
+.social-icons a.insta i{
+  color: #E1306C;
+}
+.social-icons a.yt i{
+  color: #ff0000;
+}
+.wrapper .buttons{
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+}
+.buttons button{
+  position: relative;
+  width: 100%;
+  border: none;
+  outline: none;
+  padding: 12px 0;
+  color: #31344b;
+  font-size: 17px;
+  font-weight: 400;
+  border-radius: 5px;
+  cursor: pointer;
+  z-index: 4;
+}
+.buttons button:first-child{
+  margin-right: 10px;
+}
+.buttons button:last-child{
+  margin-left: 10px;
+}
+.wrapper .social-share{
+  display: flex;
+  width: 100%;
+  margin-top: 30px;
+  padding: 0 5px;
+  justify-content: space-between;
+}
+.social-share .row1{  
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.takipedilecek a{
+  text-decoration: none;
+  color: #31344b;
+  
+}
+
+.takipedilecekcard{
+  background-color : #ECEFF1
+}
+
+
+@media (max-width : 1480px){
+
+
+.takipedilecekcard{
+  display: none;
+}
+.gizlilik{
+  display: none;
+
+}
+}
+
+
+
+
+@media (max-width : 675px){
+  
+ .blog_post {
+  width: 100%;
+ }
+  .btn_primary{
+    margin-left: 30%;
+  }
+
+  .main-div nav{
+    display: none;
+  }
+  .mobile-nav{
+    display: block;
+    position: relative;
+    
+  }
+
+  .duvar{
+    display: none;
+  }
+  
+  .search{
+    width: 350px;
+    margin: auto;
+  }
+
+  .card{
+    width: 350px;
+    margin: auto;
+  }
+
+  
+    .karsilama{
+      width: 100%;
+      text-align: center;
+      
+    }
+  
+
+  .karsilama img {
+    width: 350px;
+    height: 250px;
+    border-radius: 30%;
+
+  } 
+  
+  .allbtn{
+    margin-right: 150px;
+  }
+ 
+  .form{
+    top: 100px;
+    left: 10%;
+  }
+
+  .kapat{
+    position: absolute;
+    top: 13%;
+    left: 33%;
+    z-index: 10;
+  }
+
+  .ic-div .tweetle .form{
+    width: 80% !important;
+  }
+
+  .postcard{
+    width: 89% !important;
+  }
+
+ 
+
+ 
+}
+
+

@@ -1,0 +1,115 @@
+{% extends "anasayfa.html" %}
+{% load static %}
+
+{% block content %}
+
+<style>
+
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300;700&display=swap");
+
+
+
+
+.card {
+    padding: 15px;
+    width: 350px;
+    background: #222;
+    border-radius: 5px;
+    text-align: center;
+    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.7);
+    user-select: none;
+}
+
+.cover-photo {
+    position: relative;
+    background: url('/static/image/logo.png');
+    object-fit: cover;
+    background-size: cover;
+    height: 180px;
+    border-radius: 5px 5px 0 0;
+}
+
+.profile {
+    position: absolute;
+    width: 120px;
+    bottom: -60px;
+    left: 15px;
+    border-radius: 50%;
+    border: 2px solid #222;
+    background: #222;
+    padding: 5px;
+}
+
+.profile-name {
+    font-size: 20px;
+    margin: 25px 0 0 120px;
+    color: #fff;
+}
+
+.about {
+    margin-top: 30px;
+    line-height: 1.6;
+    color: #fff;
+    height: 30px;
+}
+
+.btn {
+    margin: 30px 15px;
+    background: #673ab7;
+    padding: 10px 25px;
+    border-radius: 3px;
+    border: 1px solid #673ab7;
+    font-weight: bold;
+    font-family: Montserrat;
+    cursor: pointer;
+    color: #222;
+    transition: 0.2s;
+}
+
+.btn:last-of-type {
+    background: transparent;
+    border-color: #673ab7;
+    color: #673ab7;
+}
+
+.btn:hover {
+    background: #673ab7;
+    color: #222;
+}
+
+@media (max-width : 675px){ 
+  .card{
+    margin-left : 20px !important;
+    
+  }
+}
+
+
+
+
+
+</style>
+
+<div class="container">
+    <div class="row">
+
+        {% for profil in profiller %}
+        {% if profil == request.user.hesap %}
+                    
+        {% else %}
+        <div class="card ms-4 mt-3 m-auto">
+                <div class="cover-photo">
+                    <img src="{{ profil.resim.url }}" class="profile">
+                </div>
+                <h3 class="profile-name">{{ profil.isim }}</h3>
+                <p class="about">{{ profil.bio }}</p>
+                <button class="btn"><a class="nav-link" href="/other/{{profil.user.id}}">Profile git</a> </button>
+        </div>
+        {% endif %}
+        {% endfor %}
+
+    </div>
+</div>
+
+
+{% endblock content %}

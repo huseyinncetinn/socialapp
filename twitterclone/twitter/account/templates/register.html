@@ -1,0 +1,76 @@
+{% extends "anasayfa.html" %}
+{% load static %}
+
+
+{% block content %}
+
+<style>
+    .register{
+        margin: 20px;
+        
+    }
+
+    
+
+    @media (max-width : 675px){
+        .register{
+            width: 350px;
+        }
+        /* .allbtn{
+            margin-left: 37%;
+        } */
+    }
+</style>
+
+<div class="ic-div ">
+    <h1 class="text-center mt-5">Üye Kayıt Formu</h1>
+    <div class="mt-5 register">
+        <form action="" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+                      
+           <div class="mb-3">
+               <label for="" class="form-label">Kullanıcı İsmi</label>
+               <input type="text" class="form-control" name="kullanici" required >
+            </div>
+            <div class="mb-3">
+                <label for="" class="form-label">E-mail</label>
+                <input type="email" class="form-control" name="email" required  >
+             </div>
+             <div class="row">
+                <div class="col">
+                    <div class="mb-3">
+                        <label for="" class="form-label">İsim</label>
+                        <input type="text" class="form-control" name="isim" required >
+                     </div>
+                </div>
+                <div class="col">
+                    <div class="mb-3">
+                        <label for="" class="form-label">Soyisim</label>
+                        <input type="text" class="form-control" name="soyisim" required >
+                     </div>
+                </div>          
+             </div>
+          
+            <div class="row">
+                <div class="col">
+                    <div class="mb-3">
+                        <label for="password" class="form-label">Şifre</label>
+                        <input type="password" class="form-control" name="sifre1" required>
+                     </div>
+                </div>
+                <div class="col">
+                    <div class="mb-3">
+                        <label for="repassword" class="form-label">Şifre Tekrar </label>
+                        <input type="password" class="form-control" name="sifre2" required>
+                     </div>
+                </div>
+            </div>
+
+            <input type="submit" value="Kayıt Ol" class="btn allbtn">
+        </form>
+    </div>
+        
+</div>
+
+
+{% endblock content %}

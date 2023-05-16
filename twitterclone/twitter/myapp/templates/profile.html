@@ -1,0 +1,335 @@
+{% extends "anasayfa.html" %}
+{% load static %}
+
+
+
+{% block content %}
+
+<style>
+
+  .begenilen , .retweetlenen{
+    display: none;
+  }
+
+  .paylasilanlar span{
+    color: green;
+  }
+
+  .paylasilanlar , .retweetlenenler , .begenilenler {
+    background-color: #ECEFF1;
+  }
+
+ 
+
+  @media (max-width : 675px){
+    .ic-div .profilduzenle .form{
+    width: 80% !important;
+  }
+  .blog-post{
+    width: 75% !important;
+    background-color: #ECEFF1;
+  }
+
+  .ic-div .sifredegis .form{
+    width: 80% !important;
+  }
+
+    .allbtn{
+      margin-left: 33%;
+    }
+    .social-share .row1 span{
+      font-size: 10px;
+    }
+    
+  }
+</style>
+
+
+<div class="ic-div">
+  
+    <div class="wrapper mt-3">
+        <div class="img-area">
+          <div class="inner-area">
+            <img src="{{user.hesap.resim.url}}" alt="">
+          </div>
+        </div>
+        <div class="name">{{user.hesap.isim}} {{ user.hesap.soyisim }}</div>
+        <div class="about">{{user.hesap.bio}}</div>
+        <div class="social-icons">
+          <a href="" class="fb"><i class="fab fa-facebook-f"></i></a>
+          <a href="#" class="twitter"><i class="fab fa-twitter"></i></a>
+          <a href="#" class="insta"><i class="fab fa-instagram"></i></a>
+          <a href="#" class="yt"><i class="fab fa-youtube"></i></a>
+        </div>
+        <div class="takip-div mb-2">
+          <small class="me-3">Takip :{{ user.hesap.takip.all.count }}</small>
+          <small>Takipçi :{{ user.hesap.takipci.all.count }}</small>
+        </div>
+        
+        <div class="buttons mt-3">
+          <button class="duzenleProfil">Profil Düzenle</button>
+          <button class="degissifre">Şifre Değiştir</button>
+        </div>
+        <div class="social-share">
+          <div class="row1">
+            <button class="paylasilanlar"><i class="far fa-comment"></i><span class="text1">Paylaşımlar</span></button>
+            <!-- <i class="icon-2 fas fa-heart"></i> -->
+            
+          </div>
+          <div class="row1">
+            <button class="begenilenler"><i class="far fa-heart"></i><span class="text2">Beğenilenler</span></button>
+            
+            <!-- <i class="icon-2 fas fa-comment"></i> -->
+            
+          </div>
+          <div class="row1">
+            <button class="retweetlenenler"><i class="fa-regular fa-share-from-square"></i><span class="text3">Paylaşılanlar</span></button>
+            
+          </div>
+        </div>
+    </div>
+
+          <div class="profilduzenle">
+            <button class="btn allbtn kapat kapat1">X</button>
+            
+            <form action="" method="POST" class="w-50 m-auto border p-4 form" enctype="multipart/form-data">
+              {% csrf_token %}
+              {{form}}
+              <input type="submit" value="Güncelle" class="btn allbtn mt-3" name="profilduzenle">
+            </form>
+          </div>
+          <div class="sifredegis">
+            <button class="btn allbtn kapat kapat2">X</button>
+            <form action="" method="POST" class="w-50 m-auto border p-4 form">
+              <div class="d-flex justify-content-end">
+                
+              </div> 
+              {% csrf_token %}
+              <label for="">Mevcut Şifre</label>
+              <input type="password" name="eski" class="form-control">
+              <label for="">Yeni Şifre</label>
+              <input type="password" name="yeni1" class="form-control">
+              <label for="">Yeni Şifre Tekrar</label>
+              <input type="password" name="yeni2" class="form-control">
+              
+              <input type="submit" value="Güncelle" class="btn allbtn mt-3" name="sifredegis">
+            </form>
+          </div> 
+          <div class="paylasilan mt-5 m-auto">
+            
+            {% for post in paylasim %}
+            <div class="blog_post mt-5 m-auto">
+              <div class="text-center"> 
+                <a class="text-center" style="color: red; text-decoration: none;" href="{% url 'deletePost' post.pk%}">Postu kaldır</a>
+              </div>
+              <div class="img_pod">
+                <img class="img1" src="{{post.owner.hesap.resim.url}}" alt="random image">
+              </div>
+              <div class="container_copy">
+                <h3 class="text-end">{{ post.created_at }}</h3>
+                <h1><a href="{% url 'profile' %}">{{post.owner.hesap.user.username}}</a></h1>
+                <p>{{ post.content }}</p>
+                <form action="" method="POST" class="mb-4">
+                  {% csrf_token %}
+                  <input type="hidden" name="postId" value="{{post.id}}">
+                  <div class="d-flex justify-content-around">
+                    <button style="background-color : #ECEFF1" type="submit" name="begen"
+                    {% if request.user in post.like.all %}
+                    class='kirmizi'
+                    {% else %}
+                    {% endif %}
+                    ><i class="fa-solid fa-heart"></i>({{post.like.all.count}})</button>
+                    <button style="background-color : #ECEFF1" type="submit" name="begenme"
+                    {% if request.user in post.dislike.all %}
+                    class='kirmizi'
+                    {% else %}
+                    {% endif %}
+                    ><i class="fa-solid fa-heart-crack"></i>({{post.dislike.all.count}})</button>
+                    <button style="background-color : #ECEFF1" type="submit" name="paylas"
+                    {% if request.user in post.retweet.all %}
+                    class='blue'
+                    {% else %}
+                    {% endif %}
+                    ><i class="fa-solid fa-share"></i>({{post.retweet.all.count}})</button>
+                  </div>
+                  
+                </form>  
+                {% if post.resim %}
+              <img src="{{post.resim.url}}" class="card-img-bottom" width="100%" />
+              {% else %}
+
+              {% endif %}
+                <a class="btn_primary" href="{% url 'postDetay' post.pk%}" >Yorum</a>
+              </div>
+              
+            </div>
+            {% endfor %}   
+          </div>    
+          <div class="begenilen m-auto">
+            {% for post in begeni %}  
+            <div class="blog_post mt-5 m-auto">
+              <div class="img_pod">
+                <img class="img1" src="{{post.owner.hesap.resim.url}}" alt="random image">
+              </div>
+              <div class="container_copy">
+                <h3 class="text-end">{{ post.created_at }}</h3>
+                  {% if post.owner == request.user %}
+                  <h1><a href="{% url 'profile' %}">{{post.owner.hesap.user.username}}</a></h1>
+                  {% else %}
+                  <h1><a href="/other/{{post.owner.id}}">{{post.owner.hesap.user.username}}</a></h1>
+
+                  {% endif %}
+                
+                <p>{{ post.content }}</p>
+                <form action="" method="POST" class="mb-4">
+                  {% csrf_token %}
+                  <input type="hidden" name="postId" value="{{post.id}}">
+                  <div class="d-flex justify-content-around">
+                    <button style="background-color : #ECEFF1" type="submit" name="begen"
+                    {% if request.user in post.like.all %}
+                    class='kirmizi'
+                    {% else %}
+                    {% endif %}
+                    ><i class="fa-solid fa-heart"></i>({{post.like.all.count}})</button>
+                    <button style="background-color : #ECEFF1" type="submit" name="begenme"
+                    {% if request.user in post.dislike.all %}
+                    class='kirmizi'
+                    {% else %}
+                    {% endif %}
+                    ><i class="fa-solid fa-heart-crack"></i>({{post.dislike.all.count}})</button>
+                    <button style="background-color : #ECEFF1" type="submit" name="paylas"
+                    {% if request.user in post.retweet.all %}
+                    class='blue'
+                    {% else %}
+                    {% endif %}
+                    ><i class="fa-solid fa-share"></i>({{post.retweet.all.count}})</button>
+                  </div>
+                  
+                </form>  
+                {% if post.resim %}
+              <img src="{{post.resim.url}}" class="card-img-bottom" width="100%" />
+              {% else %}
+
+              {% endif %}
+                <a class="btn_primary" href="{% url 'postDetay' post.pk%}" >Yorum</a>
+              </div>
+              
+            </div>
+              {% endfor %}
+          </div>
+          <div class="retweetlenen m-auto">
+            {% for post in retweet %}  
+            <div class="blog_post mt-5 m-auto">
+              <div class="img_pod">
+                <img class="img1" src="{{post.owner.hesap.resim.url}}" alt="random image">
+              </div>
+              <div class="container_copy">
+                <h3 class="text-end">{{ post.created_at }}</h3>
+                  {% if post.owner == request.user %}
+                  <h1><a href="{% url 'profile' %}">{{post.owner.hesap.user.username}}</a></h1>
+                  {% else %}
+                  <h1><a href="/other/{{post.owner.id}}">{{post.owner.hesap.user.username}}</a></h1>
+
+                  {% endif %}
+                <p>{{ post.content }}</p>
+                <form action="" method="POST" class="mb-4">
+                  {% csrf_token %}
+                  <input type="hidden" name="postId" value="{{post.id}}">
+                  <div class="d-flex justify-content-around">
+                    <button style="background-color : #ECEFF1" type="submit" name="begen"
+                    {% if request.user in post.like.all %}
+                    class='kirmizi'
+                    {% else %}
+                    {% endif %}
+                    ><i class="fa-solid fa-heart"></i>({{post.like.all.count}})</button>
+                    <button style="background-color : #ECEFF1" type="submit" name="begenme"
+                    {% if request.user in post.dislike.all %}
+                    class='kirmizi'
+                    {% else %}
+                    {% endif %}
+                    ><i class="fa-solid fa-heart-crack"></i>({{post.dislike.all.count}})</button>
+                    <button style="background-color : #ECEFF1" type="submit" name="paylas"
+                    {% if request.user in post.retweet.all %}
+                    class='blue'
+                    {% else %}
+                    {% endif %}
+                    ><i class="fa-solid fa-share"></i>({{post.retweet.all.count}})</button>
+                  </div>
+                  
+                </form>  
+                {% if post.resim %}
+              <img src="{{post.resim.url}}" class="card-img-bottom" width="100%" />
+              {% else %}
+
+              {% endif %}
+                <a class="btn_primary" href="{% url 'postDetay' post.pk%}" >Yorum</a>
+              </div>
+              
+            </div>
+              {% endfor %}
+          </div>
+    </div>
+</div>
+
+
+<script>
+
+document.querySelector('.kapat1').addEventListener('click' , function(){
+  document.querySelector('.profilduzenle').style.display= 'none' ;
+  document.querySelector('.sifredegis').style.display= 'none' ;
+  document.querySelector('.wrapper').style.opacity = '1';
+})
+
+document.querySelector('.kapat2').addEventListener('click' , function(){
+  document.querySelector('.profilduzenle').style.display= 'none' ;
+  document.querySelector('.sifredegis').style.display= 'none' ;
+  document.querySelector('.wrapper').style.opacity = '1';
+})
+
+document.querySelector('.duzenleProfil').addEventListener('click',function(){
+    document.querySelector('.profilduzenle').style.display= 'block' ;
+    document.querySelector('.wrapper').style.opacity = '0.3';
+})
+
+document.querySelector('.degissifre').addEventListener('click',function(){
+    document.querySelector('.sifredegis').style.display= 'block' ;
+    document.querySelector('.wrapper').style.opacity = '0.3';
+})
+
+document.querySelector('.paylasilanlar').addEventListener('click',function(){
+  document.querySelector('.paylasilan').style.display= 'block' ;
+    document.querySelector('.text1').style.color = 'green' ;
+    document.querySelector('.text2').style.color = 'black' ;
+    document.querySelector('.text3').style.color = 'black' ;
+    document.querySelector('.begenilen').style.display= 'none' ;
+    document.querySelector('.retweetlenen').style.display= 'none' ;
+
+})
+
+document.querySelector('.begenilenler').addEventListener('click',function(){
+  document.querySelector('.begenilen').style.display= 'block' ;
+    document.querySelector('.text1').style.color = 'black' ;
+    document.querySelector('.text3').style.color = 'black' ;
+    document.querySelector('.text2').style.color = 'green' ;
+    document.querySelector('.paylasilan').style.display= 'none' ;
+    document.querySelector('.retweetlenen').style.display= 'none' ;
+
+})
+
+document.querySelector('.retweetlenenler').addEventListener('click',function(){
+  document.querySelector('.retweetlenen').style.display= 'block' ;  
+    document.querySelector('.text1').style.color = 'black' ;
+    document.querySelector('.text2').style.color = 'black' ;
+    document.querySelector('.text3').style.color = 'green'
+    document.querySelector('.paylasilan').style.display= 'none' ;
+    document.querySelector('.begenilen').style.display= 'none' ;
+
+})
+
+
+
+
+</script>
+
+
+{% endblock content %}

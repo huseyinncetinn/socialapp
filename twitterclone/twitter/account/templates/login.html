@@ -1,0 +1,83 @@
+{% extends "anasayfa.html" %}
+{% load static %}
+
+
+{% block content %}
+
+<style>
+.login{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 80%;
+    height: 80vh;
+    margin: auto;
+}
+
+.col-6 img{
+    border-radius: 100%;
+    width: 90%;
+}
+
+.allbtn{
+    background-color: #cfb53b;
+    color: #fff;
+    margin-left: 40%;
+}
+
+.allbtn:hover{
+    background-color: goldenrod ;
+}
+
+@media (max-width : 675px){
+    .ic-div{
+        width: 1000px;
+    }
+    .login{
+        width: 290px;
+        display: block;
+    }
+
+    .col-6 img {
+        max-width: 290px;
+        margin-left: 78px;
+
+    }
+
+    .frm{
+        width: 300px;
+    }
+}
+</style>
+
+
+<div class="ic-div">
+    <div class="m-5 login">
+        <div class="col-6 mb-5">
+            <img src="{% static 'image/giris.png' %}" alt="">
+        </div>
+        <div class="col-6 frm">
+            <form method="POST">
+                {% csrf_token %}
+                <div class="mb-3">
+                    <label for="username" class="form-label">Username</label>
+                    <input type="text" class="form-control" name="username">
+                </div>
+                <div class="mb-3">
+                    <label for="password" class="form-label">Password</label>
+                    <input type="password" class="form-control" name="password">
+                </div>
+                <input type="submit" name="login" value="login" class="btn allbtn">
+            </form>
+            
+        </div>
+
+    </div>
+</div>
+
+
+
+{% endblock content %}
+
+
+

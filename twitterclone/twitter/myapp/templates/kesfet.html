@@ -1,0 +1,125 @@
+{% extends "anasayfa.html" %}
+{% load static %}
+
+
+
+{% block content %}
+
+
+
+<div class="container">
+  <div class="ic-div">
+    {% if user.is_authenticated %}
+
+    <div class="rounded mt-3">
+      <form action="{% url 'search' %}" method="GET">
+        {% csrf_token %}
+        
+        <input type="search" name="searched" value="{{searched}}" class="form-control rounded w-75 m-auto" placeholder="Kullanıcı arayın"/>
+      </form>
+    </div>
+    <button class="btn allbtn mt-3 tweetbutton text-center">Tweet oluştur</button>
+
+      
+        <div class="tweetle">
+          <button  class="btn allbtn kapat">X</button>
+          <form action="" method="POST" enctype="multipart/form-data" class="w-50 m-auto border form p-4 form">
+            <div class="d-flex justify-content-end">
+              
+            </div> 
+            {% csrf_token %}
+            {{form}}
+            <input type="submit" value="Tweetle" name="tweet" id="" class="btn allbtn mt-3">
+          </form>
+        </div>
+        
+     <div class="anasayfa_content d-flex">
+      <div class="anacard">
+      {% for post in posts %}      
+      <div class="blog_post mt-5">
+        <div class="img_pod">
+          <img class="img1" src="{{post.owner.hesap.resim.url}}" alt="random image">
+        </div>
+        <div class="container_copy">
+          <h3 class="text-end">{{ post.created_at }}</h3>
+          {% if post.owner == request.user %}
+                  <h1><a href="{% url 'profile' %}">{{post.owner.hesap.user.username}}</a></h1>
+                  {% else %}
+                  <h1><a href="/other/{{post.owner.id}}">{{post.owner.hesap.user.username}}</a></h1>
+
+                  {% endif %}
+          <p>{{ post.content }}</p>
+          <form action="" method="POST" class="mb-4">
+            {% csrf_token %}
+            <input type="hidden" name="postId" value="{{post.id}}">
+            <div class="d-flex justify-content-around">
+              <button style="background-color : #ECEFF1" type="submit" name="begen"
+              {% if request.user in post.like.all %}
+              class='kirmizi'
+              {% else %}
+              {% endif %}
+              ><i class="fa-solid fa-heart"></i>({{post.like.all.count}})</button>
+              <button style="background-color : #ECEFF1" type="submit" name="begenme"
+              {% if request.user in post.dislike.all %}
+              class='kirmizi'
+              {% else %}
+              {% endif %}
+              ><i class="fa-solid fa-heart-crack"></i>({{post.dislike.all.count}})</button>
+              <button style="background-color : #ECEFF1" type="submit" name="paylas"
+              {% if request.user in post.retweet.all %}
+              class='blue'
+              {% else %}
+              {% endif %}
+              ><i class="fa-solid fa-share"></i>({{post.retweet.all.count}})</button>
+            </div>
+            
+          </form>  
+          {% if post.resim %}
+        <img src="{{post.resim.url}}" class="card-img-bottom" width="100%" />
+        {% else %}
+
+        {% endif %}
+          <a class="btn_primary" href="{% url 'postDetay' post.pk%}" >Yorum</a>
+        </div>
+        
+      </div>             
+      {% endfor %}  
+    </div>
+      <div class="mt-3 takipedilecek" style="position: fixed; right: 250px;">
+        <div class="card takipedilecekcard mt-3" style="width: 18rem;">
+          <h6 class="m-3">Takip edebileceğin kişiler</h6>
+          <ul class="list-group list-group-light list-group-small">
+            {% for profil in profiller %}
+                        {% if profil == request.user.hesap %}
+                        
+                        {% else %}
+                        <div class="d-flex align-items-center m-1 takipedilecek">
+                          <img class="mx-2 rounded-5" src="{{profil.resim.url}}" width="35px" alt=""><a class="mx-2" href="/other/{{profil.user.id}}">{{profil.isim}}</a>
+                        </div>
+                        {% endif %}
+            {% endfor %} 
+            
+          </ul>
+        </div>
+        <div class="gizlilik">
+              <s class="m-0" style="font-size: 14px; "><a style="color :grey"  href="">Gizlilik Politikaları</a></s>
+              <s class="m-0" style="font-size: 14px; "><a style="color :grey"  href="">Gizlilik Politikaları</a></s>
+              <p class="m-0" style="font-size: 14px; "><a style="color :grey"  href="">Gizlilik Politikaları</a></p>
+        
+        </div>
+        
+        
+        
+    </div>
+
+    </div> 
+
+        
+    {% else %}
+    
+{% endif %}
+    </div>
+</div>
+
+
+{% endblock content %}

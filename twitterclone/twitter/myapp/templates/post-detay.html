@@ -1,0 +1,156 @@
+{% extends "anasayfa.html" %}
+{% load static %}
+
+
+
+{% block content %}
+
+<style>
+    .ic-div{
+        width:750px;
+        margin: auto;
+    }
+    .yorumlama{
+        width: 40%;  
+        height: 1px;
+    }
+    .yorum{
+        border: 2px solid grey;
+        border-radius: 10px;
+        width: 50%;
+        margin: auto;
+    }
+
+    .yorum p{
+        font-size: 1vw;
+    }
+
+    .text-center a{
+        text-decoration: none;
+        color: black    ;
+        
+    }
+
+    .yorumgenel{
+        overflow-y: scroll;
+        height: 30vh;
+    }
+
+    .yorumgenel::-webkit-scrollbar {
+        width: 15px;
+        }
+
+    .yorumgenel::-webkit-scrollbar-track {
+        box-shadow: inset 0 0 5px #bf00ff; 
+        border-radius: 10px;
+        }
+
+    .yorumgenel::-webkit-scrollbar-thumb {
+        background: #673ab7; 
+        border-radius: 10px;
+        }
+
+    .yorum .deletecomment input{
+        color: red;
+        border: 2px solid red;
+        margin: 5px;
+        padding:0 3px 0 3px;
+        border-radius: 4px;
+    }
+    .yorum .deletecomment input:hover{
+        color: white;
+        background-color: red;
+        
+        
+    }
+
+    
+
+    .text-center h5{
+        font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    }
+
+    .container1{
+        border: 2px solid black;
+        height: 100%;
+        border-radius: 30px;
+        box-shadow: 2px 2px 10px 4px grey;
+    }
+
+    @media (max-width : 675px){
+        .allbtn{
+            margin-left: 30% !important;
+        }
+        .yorum{
+            width: 95%;
+        }
+        .yorum p{
+        font-size: 9px;
+        }
+        .yorumlama{
+        width: 80%;  
+        height: 1px;
+        }
+    }
+</style>
+<div class="container">
+    <div class="container container1 mt-5">
+        <div class="text-center mt-5"> 
+            {% if postdetay.resim %}
+            <img src="{{postdetay.resim.url}}" class="rounded-4" width="50%" />
+            {% else %}
+            {% endif %}
+            <br>
+            <img src="{{postdetay.owner.hesap.resim.url}}" width="40px" class="rounded-5 mt-2 me-2" alt="">
+            <a href="/other/{{postdetay.owner.id}}">{{postdetay.owner}}</a>
+            <h5 class="mt-3">{{postdetay.content}}</h5>
+        </div>
+        <div class="yorumgenel">
+        {% if yorumlar.all.count == 0 %}
+
+        <h5 class="mt-5 text-center">Henüz yorum yok konuşmayı başlat.</h5>
+                    
+        {% else %}
+                    {% for yorum in yorumlar %}
+                    
+                    <div class="yorum text-center mb-2">
+                    {% if request.user == yorum.kullanici %}
+                    <form action="" method="POST">
+                        {% csrf_token %}
+                        <div class="d-flex justify-content-end mx-2 deletecomment">
+                            <input type="hidden" name="userYorum" value="{{yorum.id}}">
+                            <input type="submit" name="sil" class="btn" value="x">
+                        </div> 
+                    </form>
+                            
+                    {% else %}
+                    {% endif %}
+                        
+                        <a href=""><h6 class="mt-2">{{ yorum.kullanici }} | <small class="text-capitalize"> {{ yorum.yorumTarih }} </small></h6></a>
+                        <p>{{ yorum.yorum }}</p>
+                    </div>    
+                    {% endfor %}
+        {% endif %}
+            
+        </div>
+            
+    
+        
+    
+    </div>
+    <div class="container mt-5">
+        <div class="yorumlama m-auto">
+            <form action="" method="POST" class="m-auto">
+                {% csrf_token %} 
+                {{form}}
+                <input style="margin-left: 38%;" type="submit" name="yorumButton" class="btn allbtn mt-1" value="Yorum Yap">
+            </form>
+        </div>
+    </div>
+    
+
+</div>
+
+
+
+{% endblock content %}
