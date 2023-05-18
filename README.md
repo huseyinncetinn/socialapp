@@ -1,6 +1,6 @@
 # Social APP
 
-Bu projede kullanıcıların günlük hayat yada akıllarına gelen her konu bir konu hakkında post paylaşmalarına olanak sağladım. Kullanıcılar bu projede post paylaşabilir , postlara yorum yapabilir , postları beğenip , beğenmeyip , paylaşabilirler , birbirlerini takip edebilirler , kişi önerileri gibi bir çok özellikle besledim.
+Bu projede kullanıcıların günlük hayat yada akıllarına gelen her konu bir konu hakkında post paylaşmalarına olanak sağladım. Kullanıcılar bu projede post paylaşabilir , postlara yorum yapabilir , postları beğenip , beğenmeyip , paylaşabilirler , birbirlerini takip edebilirler , kişi önerileri gibi bir çok özellikle besledim.Site responsivedir.
 
 
 ## Özellikler
